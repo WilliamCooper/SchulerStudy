@@ -1,0 +1,532 @@
+%% LyX 2.1.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass{beamer}
+\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{calc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ % this default might be overridden by plain title style
+ \newcommand\makebeamertitle{\frame{\maketitle}}%
+ % (ERT) argument for the TOC
+ \AtBeginDocument{%
+   \let\origtableofcontents=\tableofcontents
+   \def\tableofcontents{\@ifnextchar[{\origtableofcontents}{\gobbletableofcontents}}
+   \def\gobbletableofcontents#1{\origtableofcontents}
+ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usetheme{WAC}
+%\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}[default]{}
+\setbeamertemplate{navigation symbols}{}
+%\setbeamercovered{transparent}
+%\setbeamercovered{opaque}
+\setbeamertemplate{enumerate subitem}{(\alph{enumii})}
+
+% or ...
+
+\setbeamercovered{transparent}
+% or whatever (possibly just delete it)
+\newenvironment{lyxlist}[1]
+{\begin{list}{}
+{\settowidth{\labelwidth}{#1}
+\setlength{\leftmargin}{\labelwidth}
+\addtolength{\leftmargin}{\labelsep}
+\renewcommand{\makelabel}[1]{##1\hfil}}}
+{\end{list}}
+\newcommand{\datetoday}{\number\day\space
+     \ifcase\month\or January\or February\or March\or April\or May\or
+     June\or July\or August\or September\or October\or November\or
+     December\fi
+     \space\number\year}
+\newcommand{\attachm}[1]{\begin{lyxlist}{Attachments:00}
+\item [Attachments:] {#1}
+\end{lyxlist}}
+
+\AtBeginDocument{
+  \def\labelitemii{\(\triangleright\)}
+  \def\labelitemiii{\normalfont\bfseries{--}}
+  \def\labelitemiv{\(\diamond\)}
+}
+
+\makeatother
+
+\begin{document}
+\setbeamercolor{normal text}{bg=yellow!10}
+
+
+
+
+\title[Vertical Wind Uncertainty]{Reducing Uncertainty in Measurement of Vertical Wind}
+
+
+\subtitle{Adjustment Based on the Schuler Relationships}
+
+
+\author{Al Cooper}
+
+
+\institute{Research Aviation Facility, Earth Observing Laboratory\\
+National Center for Atmospheric Research\and}
+
+
+\date{RSIG Presentation on 11/10/2014}
+
+\makebeamertitle
+
+
+%\pgfdeclareimage[height=0.5cm]{institution-logo}{institution-logo-filename}
+%\logo{\pgfuseimage{institution-logo}}
+
+
+
+
+
+
+
+%\beamerdefaultoverlayspecification{<+->}
+\begin{frame}{Outline}
+
+
+\tableofcontents{}
+
+\end{frame}
+
+\section{Measurement Uncertainty for WIC}
+
+
+\subsection[Uncertainty in WIC]{Assessment of Uncertainty}
+\begin{frame}{CHARACTERIZING UNCERTAINTY IN MEASUREMENTS}
+
+\begin{block}{Conventional Approach:}
+
+\begin{enumerate}
+\item Review measurement method
+\item Characterize measurements involved:
+
+\begin{enumerate}
+\item Sensors: uncertainty characteristics
+\item Calibrations, intercomparisons, etc.
+\item Other studies of measurement uncertainty
+\end{enumerate}
+\item Tabulate elemental uncertainties and net uncertainty
+\item Discuss individual elements, esp.~significant ones
+\item Consider limiting factors and ways to improve the measurement.
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{RESULTS TO DATE:}
+
+
+\textcolor{black}{\scriptsize{}}%
+\begin{tabular}{c>{\centering}p{2.3cm}c>{\centering}p{1.8cm}>{\centering}p{1.5cm}>{\centering}p{1.5cm}}
+\toprule 
+\textbf{\textcolor{black}{\scriptsize{}\#}} & \textbf{\textcolor{black}{\scriptsize{}measure-}}\\
+\textbf{\textcolor{black}{\scriptsize{}ment}} & \textbf{\textcolor{black}{\scriptsize{}bias}}\textcolor{black}{\scriptsize{} } & \textbf{\textcolor{black}{\scriptsize{}random error}}\textcolor{black}{\scriptsize{} } & \textbf{\textcolor{black}{\scriptsize{}$\delta w$ bias}}\\
+\textbf{\textcolor{black}{\scriptsize{}m\,s$^{-1}$}} & \textbf{\textcolor{black}{\scriptsize{}$\delta w$, random }}\tabularnewline
+\midrule
+\midrule 
+\textcolor{black}{\scriptsize{}1} & \textcolor{black}{\scriptsize{}radome ADIFR} & \textcolor{black}{\scriptsize{}0.07~hPa } & \textcolor{black}{\scriptsize{}0.002~hPa } & \textcolor{black}{\scriptsize{}--} & \textcolor{black}{\scriptsize{}--}\tabularnewline
+\midrule 
+\textcolor{black}{\scriptsize{}2} & \textcolor{black}{\scriptsize{}AOA: fit} & \textcolor{black}{\scriptsize{}0.03$^{\circ}$} & \textcolor{black}{\scriptsize{}0.001$^{\circ}$} & \textcolor{black}{\scriptsize{}0.12 } & \textcolor{black}{\scriptsize{}0.04}\tabularnewline
+\midrule 
+\textcolor{black}{\scriptsize{}3} & \textcolor{black}{\scriptsize{}sideslip} & \textcolor{black}{\scriptsize{}0.07~hPa } & \textcolor{black}{\scriptsize{}0.002~hPa } & \textcolor{black}{\scriptsize{}--} & \textcolor{black}{\scriptsize{}--}\tabularnewline
+\midrule 
+\textcolor{black}{\scriptsize{}4} & \textcolor{black}{\scriptsize{}dynamic pressure QCF} & \textcolor{black}{\scriptsize{}0.34~hPa } & \textcolor{black}{\scriptsize{}0.01~hPa } & \textcolor{black}{\scriptsize{}<0.02} & \textcolor{black}{\scriptsize{}0.001}\tabularnewline
+\midrule 
+\textbf{\textcolor{red}{\footnotesize{}5}} & \textbf{\textcolor{red}{\footnotesize{}pitch }} & \textbf{\textcolor{red}{\footnotesize{}0.05$^{\circ}$}} & \textbf{\textcolor{red}{\footnotesize{}0.02$^{\circ}$ }} & \textbf{\textcolor{red}{\footnotesize{}0.19}} & \textbf{\textcolor{red}{\footnotesize{}0.08}}\tabularnewline
+\midrule 
+\textcolor{black}{\scriptsize{}6 } & \textcolor{black}{\scriptsize{}GV vertical velocity } & \textcolor{black}{\scriptsize{}0.03~m/s } & \textcolor{black}{\scriptsize{}<0.03~m/s } & \textcolor{black}{\scriptsize{}0.03} & \textcolor{black}{\scriptsize{}<0.03}\tabularnewline
+\midrule 
+\textcolor{black}{\scriptsize{}7} & \textcolor{black}{\scriptsize{}GV u, v motion } & \textcolor{black}{\scriptsize{}0.03~m/s } & \textcolor{black}{\scriptsize{}<0.03~m/s } & \textcolor{black}{\scriptsize{}--} & \textcolor{black}{\scriptsize{}--}\tabularnewline
+\midrule 
+\textcolor{black}{\scriptsize{}8} & \textcolor{black}{\scriptsize{}pressure PSF} & \textcolor{black}{\scriptsize{}0.10\,hPa} & \textcolor{black}{\scriptsize{}0.001\,hPa} & \textcolor{black}{\scriptsize{}--} & \textcolor{black}{\scriptsize{}--}\tabularnewline
+\midrule 
+\textcolor{black}{\scriptsize{}9} & \textcolor{black}{\scriptsize{}temperature ATX} & \textcolor{black}{\scriptsize{}0.3$^{\circ}$} & \textcolor{black}{\scriptsize{}0.1$^{\circ}$C } & \textcolor{black}{\scriptsize{}--} & \textcolor{black}{\scriptsize{}--}\tabularnewline
+\bottomrule
+\end{tabular}{\scriptsize \par}
+
+\end{frame}
+
+
+
+\begin{frame}{ANGLE OF ATTACK: GOOD REPRESENTATION}
+
+
+\includegraphics[width=0.95\textwidth,height=0.9\textheight]{../WindUncertainty/figure/WU-AOA-vs-Standard}
+
+\end{frame}
+
+
+
+\subsection{Importance of 'pitch'}
+\begin{frame}[fragile]{DOMINANT CONTRIBUTOR TO UNCERTAINTY}
+
+
+%\beamerdefaultoverlayspecification{<+->}
+\begin{alertblock}{PITCH}
+
+\begin{itemize}
+\item Uncertainty estimate (0.05$^{\circ}$) comes from Honeywell specs.
+\item Comparison of redundant measurements:
+
+\begin{itemize}
+\item differences of at least 0.02$^{\circ}$ for roll within range $\pm5^{\circ}$ 
+\item RMS difference $0.12{}^{\circ}$ without that restriction.
+\end{itemize}
+\item Any improvement in pitch will improve the wind measurements
+\end{itemize}
+\end{alertblock}
+
+\onslide+<2->
+\begin{block}{ROUTES TO IMPROVEMENT:}
+
+\begin{enumerate}
+\item APPLANIX: 
+
+\begin{enumerate}
+\item Specs are significantly better
+\item Achieves this primarily through a Kalman filter w/ GPS\\
+\onslide+<3->
+\end{enumerate}
+\item Implement our own full Kalman filter for the Honeywell IRS:\\
+\onslide+<4->
+\item \textcolor{red}{\footnotesize{}Use the coupling between acceleration
+errors and pitch errors to deduce a correction for pitch.}{\footnotesize \par}
+\end{enumerate}
+\end{block}
+\end{frame}
+
+
+
+\section{Developing a Correction Algorithm}
+
+
+\subsection{Basis for the algorithm}
+\begin{frame}[fragile]{SCHULER COUPLING OF ERRORS}
+
+\begin{columns}
+
+
+\column{5cm}
+\begin{block}{Effect of a pitch error:}
+
+\begin{enumerate}
+\item False platform orientation produces a false horizontal component of
+sensed gravity\onslide+<2->
+\item Result is a false accelera- tion, leading to growth of an error in
+the ground speed:\\
+\[
+\frac{d(\delta v_{n})}{dt}=-g\delta\theta
+\]
+\\
+\onslide<1->
+\end{enumerate}
+\end{block}
+
+\column{6 cm}
+
+
+<<plot-illustrating-pitch-coupling, fig.width=3, fig.height=4, include=TRUE, echo=FALSE>>=
+source("./chunks/plot-illustrating-pitch-coupling")
+@
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{OSCILLATION OF ERRORS}
+
+\begin{columns}
+
+
+\column{5cm}
+\begin{block}{Position error offsets pitch error:}
+
+\begin{enumerate}
+\item False groundspeed south gives position developing too far south\onslide+<2->
+\item Result is a false accelera- tion, compensating for the pitch error\onslide+<3->
+\item When net correction is zero, southward ground-speed error is still
+present, and the error correction overshoots.\onslide<1->
+\end{enumerate}
+\end{block}
+
+\column{6 cm}
+
+
+\vskip-1cm
+<<plot-change-gravity-w-motion, include=TRUE, fig.width=4.5, fig.height=5, echo=FALSE>>=
+source("./chunks/plot-change-gravity-w-motion")
+@
+\vskip-0.5cm\onslide+<4->
+\begin{alertblock}{}
+
+
+\textcolor{blue}{Result: oscillation of bounded errors.}
+
+Roll: analogous to pitch.
+\end{alertblock}
+\end{columns}
+
+\end{frame}
+
+\subsection{Reference frames}
+\begin{frame}{MUST CONSIDER REFERENCE FRAMES}
+
+\begin{block}{Four reference frames involved:}
+
+\begin{enumerate}
+\item body frame: oriented wrt aircraft axes {[}b-frame{]}
+\item local-level frame: ENU (east-north-up) {[}l-frame{]}
+\item earth-fixed frame: z from CG to N pole, x -> prime meridian
+\item inertial frame: like earth-fixed frame but x -> the vernal equinox
+and does not rotate
+\end{enumerate}
+\end{block}
+\begin{summaryblock}{Key transformation:}
+
+\begin{itemize}
+\item Pitch, roll, heading defined in body frame
+\item INS and GPS provide ground-speed components in the l-frame
+\item The attitude angle changes are best seen in the l-frame
+\item Key transformation is from errors in l-frame to errors in b-frame
+\end{itemize}
+\end{summaryblock}
+\end{frame}
+
+\begin{frame}{MIXING OF ROLL AND PITCH ANGLES}
+
+\begin{exampleblock}{Imagine a unit vector in the l-frame representing angle errors}
+
+\begin{itemize}
+\item Use to represent what the INU thinks is the upward direction in the
+l-frame.
+\item Will have components $\delta\theta$ and $\delta\phi$ representing
+the respective errors in pitch and roll.
+\item The general aircraft orientation is in some other frame than along
+the l-frame axes:
+
+\begin{itemize}
+\item a positive pitch error for northbound flight will be a negative pitch
+error for southbound flight.
+\item other flight directions mix the components of the angle error, with
+e.g. the roll error for northbound flight becoming the pitch error
+for eastbound flight.
+\end{itemize}
+\item The relevant transformation, l-frame to b-frame, is the inverse of
+the one we normally use for wind processing.
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+
+
+\subsection{Deducing pitch errors from ground-speed errors}
+\begin{frame}[fragile]{AN EXAMPLE OF GROUND-SPEED ERRORS}
+
+
+\vskip-1.3cm
+<<initialization,echo=FALSE,include=FALSE>>=
+
+require(Ranadu, quietly = TRUE, warn.conflicts=FALSE)
+require(ggplot2)
+require(grid)
+library(knitr)
+require(ggthemes)
+opts_chunk$set(echo=FALSE, include=FALSE, fig.lp="fig:")
+opts_chunk$set(fig.width=6, fig.height=5, fig.pos="center", digits=4)
+thisFileName <- "XXX"
+Directory <- DataDirectory ()
+Flight <- "ff02" 				# XXX change this
+Project = "DEEPWAVE"			 # XXX change this
+fname = sprintf("%s%s/%s%s.nc", Directory,Project,Project,Flight)
+VarNames <- c("BLATA", "BLONGA", "BNORMA", "VNS", "VEW", "VSPD", "GGVNS", "GGVEW", "GGVSPDB", "LAT", "LON", "ALT", "THDG") 
+Data <- getNetCDF (fname, standardVariables(VarNames))		
+SaveRData <- sprintf("%s.Rdata.gz", thisFileName)
+
+@
+
+
+<<v-errors-straight-leg, include=TRUE, fig.height=4>>=
+source("./chunks/v-errors-straight-leg")
+@
+
+
+\begin{center}
+\fbox{\begin{minipage}[t]{0.8\columnwidth}%
+DEEPWAVE ferry flight ff02, Hawaii to Pago Pago, 1 June 2014, flying
+mostly near-southbound.%
+\end{minipage}}
+\par\end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{FINDING PITCH AND ROLL ERRORS IN THE $l$-FRAME}
+
+\begin{exampleblock}{pitch, roll, ground-speed errors: $\delta\theta$, $\delta\phi$,
+$\delta v_{n,e}$:}
+
+
+\begin{eqnarray*}
+\delta\theta & = & -\frac{1}{g}\frac{d(\delta v_{n})}{dt}\\
+\delta\phi & = & -\frac{1}{g}\frac{d(\delta v_{e})}{dt}
+\end{eqnarray*}
+
+
+\end{exampleblock}
+\begin{block}{Find the right-side derivatives in the l-frame:}
+
+\begin{enumerate}
+\item Second-by-second, $\Delta\delta v_{n,e}/\Delta t$ are too noisy
+\item $A\cos(\Omega_{Sch}t+\zeta)$ ? Need to allow $A$ and $\zeta$ to
+vary
+\item Instead, chose 4th-order polynomial fit centered over 1/5 Schuler
+period or 1013 s.
+\item Technique: Savitzky-Golay polynomials
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{DEDUCED PITCH AND ROLL ERRORS}
+
+
+\vskip-1cm
+<<sg-poly-smoothing, include=TRUE, fig.height=4, echo=FALSE>>=
+Cradeg <- pi/180
+source ("./chunks/sg-poly-smoothing")
+@
+
+
+\center{\vskip-0.5cm\fcolorbox{black}{yellow!40}{%
+\begin{minipage}[t]{0.8\columnwidth}%
+For DEEPWAVE ff01, pitch errors are max.~0.005$^{\circ}$, or 0.1$\times$specifications,
+exc.~in final descent.%
+\end{minipage}}}
+
+\end{frame}
+
+\begin{frame}[fragile]{GROUND-SPEED ERRORS IN DEEPWAVE rf01, $l$-frame:}
+
+\begin{block}{}
+
+
+\vskip-1.0cm
+<<processing-1, include=TRUE, fig.height=4.2, echo=FALSE>>=
+Flight <- "rf01"
+source ("./chunks/processing-1")
+@
+
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{PITCH ERRORS IN DEEPWAVE rf01, b-frame:}
+
+\begin{block}{}
+
+
+\vskip-1.0cm
+<<processing-2, include=TRUE, fig.height=4.2, echo=FALSE>>=
+source ("./chunks/processing-2")
+@
+
+\end{block}
+\end{frame}
+
+
+
+\section{Summary and Status}
+\begin{frame}{REMAINING PROBLEM: EFFECT OF HEADING ERROR}
+
+
+Consider northward flight:\beamerdefaultoverlayspecification{<+-|alert@+|visible@+->}\setbeamercolor{alerted text}{fg=blue}
+\begin{enumerate}
+\item A positive error in heading leads to the IRU ``thinking'' it is
+farther east than it is.
+\item Therefore it resolves sensed gravity as having a false eastward component,
+and therefore senses an eastward acceleration.
+\item That acceleration leads to an error in roll angle and the introduction
+of a Schuler oscillation in coupled eastward acceleration and roll
+error.
+\item When the aircraft turns, this can become a pitch error in the b-frame.
+\item However, the magnitude of the error is still sensed and can be corrected.
+\item This introduces another source of pitch error in addition to initial
+alignment error. The correction procedure is still valid.
+\item Growing errors in lateral velocity may constrain the heading error.
+(Future investigation?)
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{SUMMARY}
+
+\begin{summaryblock}{A correction can be applied to pitch and hence to vertical wind}
+
+\begin{enumerate}
+\item Deduce the error in pitch from the time derivative of the error in
+ground speed.
+\item Transform to the b-frame using the inverse of the conventional 'gusto'
+transformation.
+\item Consider a new pitch variable (PITCHC?) and new vertical-wind variable
+(WI\_SCH or WIS or ?)
+
+\begin{enumerate}
+\item To first order, just add TASX{*}$\delta\theta_{b}$ to the vertical
+wind.
+\item More complicated in turns; maybe for DEEPWAVE just provide the simpler
+variable with the qualification that this correction is not valid
+in turns.
+\end{enumerate}
+\item Second-pass processing after nimbus is preferable because it allows
+the calculation of the time derivative of the ground-speed error using
+centered intervals.
+\end{enumerate}
+\end{summaryblock}
+\end{frame}
+
+\begin{frame}[fragile]{Reproducibility Information:}
+
+
+<<reproducibility, echo=FALSE, include=FALSE>>=
+thisFileName <- "SchulerPresentation"
+@
+
+
+\begin{tabular}{ll}
+\textsc{\textcolor{blue}{Project:}} & \Sexpr{thisFileName}\tabularnewline
+\textsc{\textcolor{blue}{Archive package:}} & \Sexpr{thisFileName}.zip\tabularnewline
+\textsc{\textcolor{blue}{Contains:}} & attachment list below\tabularnewline
+\textsc{\textcolor{blue}{Program:}} & \Sexpr{thisFileName}.Rnw\tabularnewline
+\textsc{\textcolor{blue}{Original Data:}} & /scr/raf\_data/\Sexpr{Project} \tabularnewline
+\textsc{\textcolor{blue}{Git:}} & git@github.com:WilliamCooper/\Sexpr{thisFileName}.git\tabularnewline
+\end{tabular}
+
+
+\attachm{\Sexpr{thisFileName}.Rnw\\\Sexpr{thisFileName}.pdf\\SessionInfo}
+%\cc{first attachment\\second\\3rd att}
+%\attach{attachment}
+%\attachm{first\\second} %\cc{first attachment\\second\\3rd att}
+<<save-system-info, echo=FALSE>>= 
+cat (toLatex(sessionInfo()), file="SessionInfo")
+
+@ 
+<<make-zip-archive, echo=TRUE, INCLUDE=TRUE>>=
+system (sprintf("zip %s.zip %s.Rnw %s.pdf SessionInfo", thisFileName, thisFileName, thisFileName))
+
+@ 
+
+\end{frame}
+
+\end{document}
