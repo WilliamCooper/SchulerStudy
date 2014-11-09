@@ -510,7 +510,7 @@ thisFileName <- "SchulerPresentation"
 \textsc{\textcolor{blue}{Contains:}} & attachment list below\tabularnewline
 \textsc{\textcolor{blue}{Program:}} & \Sexpr{thisFileName}.Rnw\tabularnewline
 \textsc{\textcolor{blue}{Original Data:}} & /scr/raf\_data/\Sexpr{Project} \tabularnewline
-\textsc{\textcolor{blue}{Git:}} & \small{git@github.com:WilliamCooper/\Sexpr{thisFileName}.git}\tabularnewline
+\textsc{\textcolor{blue}{Git:}} & \small{git@github.com:WilliamCooper/SchulerStudy.git}\tabularnewline
 \end{tabular}
 
 
