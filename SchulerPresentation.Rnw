@@ -510,11 +510,11 @@ thisFileName <- "SchulerPresentation"
 \textsc{\textcolor{blue}{Contains:}} & attachment list below\tabularnewline
 \textsc{\textcolor{blue}{Program:}} & \Sexpr{thisFileName}.Rnw\tabularnewline
 \textsc{\textcolor{blue}{Original Data:}} & /scr/raf\_data/\Sexpr{Project} \tabularnewline
-\textsc{\textcolor{blue}{Git:}} & git@github.com:WilliamCooper/\Sexpr{thisFileName}.git\tabularnewline
+\textsc{\textcolor{blue}{Git:}} & \small{git@github.com:WilliamCooper/\Sexpr{thisFileName}.git}\tabularnewline
 \end{tabular}
 
 
-\attachm{\Sexpr{thisFileName}.Rnw\\\Sexpr{thisFileName}.pdf\\SessionInfo}
+\attachm{\small{\Sexpr{thisFileName}.Rnw\\\Sexpr{thisFileName}.pdf\\chunks (code imported into \Sexpr{thisFileName}.Rnw)\\SessionInfo}}
 %\cc{first attachment\\second\\3rd att}
 %\attach{attachment}
 %\attachm{first\\second} %\cc{first attachment\\second\\3rd att}
@@ -523,7 +523,7 @@ cat (toLatex(sessionInfo()), file="SessionInfo")
 
 @ 
 <<make-zip-archive, echo=TRUE, INCLUDE=TRUE>>=
-system (sprintf("zip %s.zip %s.Rnw %s.pdf SessionInfo", thisFileName, thisFileName, thisFileName))
+system (sprintf("zip %s.zip %s.Rnw %s.pdf ./chunks SessionInfo", thisFileName, thisFileName, thisFileName))
 
 @ 
 
