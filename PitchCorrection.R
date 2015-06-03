@@ -1,6 +1,6 @@
 ## ----get-data, include=FALSE, echo=FALSE---------------------------------
 
-require(Ranadu)
+library(Ranadu, warn.conflicts=FALSE, quietly=TRUE)
 
 Project <- "DEEPWAVE"
 Flight <- 16
@@ -17,6 +17,7 @@ Z <- file.copy (fname, fnew)
 
 ## get a data.frame with the needed variables
 DF <- getNetCDF (fname, Vars)
+# DF$LAT <- DF$LATC   ## temporary for testing with file that doesn't have LAT
 ## get the dimensions from the data.frame
 Dimensions <- attr(DF, "Dimensions")
 
