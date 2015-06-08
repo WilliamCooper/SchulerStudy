@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if [ "$1" == "" ]; then
+   echo "Must include project name on command-line, e.g. AddHtTerrain FRAPPE"
+   exit
+fi
+
+project=$1
+echo "Adding pitch corrected vars to production netCDF files for project $project"
+
+for file in `ls /scr/raf/Prod_Data/$project/${project}rf??Z.nc`
+do
+    flight=${file:(-8):4}
+    Rscript PitchCorrection.R $project $flight
+done
