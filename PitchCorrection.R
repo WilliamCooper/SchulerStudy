@@ -1,17 +1,34 @@
 ## ----get-data, include=FALSE, echo=FALSE---------------------------------
+library(Ranadu, quietly = TRUE, warn.conflicts=FALSE)
+require(ncdf4)
 
-library(Ranadu, warn.conflicts=FALSE, quietly=TRUE)
+writeLines("This script must be run from tikal as libraries aren't
+currently installed elsewhere")
 
-Project <- "DEEPWAVE"
-Flight <- 16
+args <- commandArgs(trailingOnly = TRUE)
+Sys.setenv(DATA_DIR="/scr/raf/Prod_Data")
+
+if (length(args) == 2) {
+   print("Using values from command line")
+   Project = args[1] ## project name in caps
+   Flight <- args[2] ## rf16Z
+} else if (length(args) == 0) {
+   print("Using hardcoded values for Project and flight.")
+   Project <- "DEEPWAVE"
+   Flight <- "rf01"
+} else {
+   writeLines("Usage: \n\tTo use in RStudio browser window, edit hard-coded flight and project name above and run. \n\t To use at the command line, give project name in caps and flight number with lower case [rtf] as command line arguments, e.g. \n\t\tRscript PitchCorrection.R $project $flight")
+   quit()
+}
+
 ## variables needed for the pitch-correction algorithm, and to correct WIC:
 Vars <- c("VNS", "VEW", "GGVNS", "GGVEW", "LAT", "GGALT", "THDG", "PITCH", "ROLL",
           "WIC", "TASX")
 ## opens file, by default in DataDirectory () which is /scr/raf_data/ on tikal:
-fname <- sprintf("%s%s/%srf%02d.nc", DataDirectory (), Project, Project, Flight)
+fname <- sprintf("%s%s/%s%s.nc", DataDirectory (), Project, Project, Flight)
 ## copy the file to a duplicate and add the new variables to that duplicate
 ## (CAUTION:  will overwrite if already present)
-fnew <- sprintf("%s%s/%srf%02dPC.nc", DataDirectory (), Project, Project, Flight)
+fnew <- sprintf("%s%s/%s%sPC.nc", DataDirectory (), Project, Project, Flight)
 unlink(fnew)
 Z <- file.copy (fname, fnew)
 
